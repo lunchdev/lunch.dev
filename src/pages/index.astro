@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+
 const youtube_videos = await getCollection('youtube_videos');
 ---
 
@@ -16,15 +18,22 @@ const youtube_videos = await getCollection('youtube_videos');
 			<div>
 				<h2>{video.title}</h2>
 				<p>{video.description}</p>
-				<iframe
-					width="560"
-					height="315"
-					src={`https://www.youtube.com/embed/${contentDetails.videoId}`}
-					title="YouTube video player"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					allowfullscreen></iframe>
+				<lite-youtube
+					videoid={contentDetails.videoId}
+				>
+					<a
+						href={`https://youtube.com/watch?v=${contentDetails.videoId}`}
+						class="lyt-playbtn"
+						title="Play Video"
+					>
+						<span class="lyt-visually-hidden">
+							Play video: {video.title}
+						</span>
+					</a>
+				</lite-youtube>
 			</div>
 		)
 	})}
 </Layout>
+
+<script src="lite-youtube-embed/src/lite-yt-embed.js"></script>

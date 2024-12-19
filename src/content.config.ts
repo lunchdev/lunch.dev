@@ -20,6 +20,11 @@ const youtube_videos = defineCollection({
     snippet: z.object({
       title: z.string(),
       description: z.string(),
+      thumbnails: z.object({
+        default: z.object({
+          url: z.string(),
+        }),
+      }),
     }),
     contentDetails: z.object({
       videoId: z.string(),
