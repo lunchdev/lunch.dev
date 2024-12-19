@@ -1,15 +1,30 @@
 {
-  "name": "lunch-dev",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.0.9",
-    "lite-youtube-embed": "^0.3.3"
-  }
+	"name": "lunch-dev",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"astro": "^5.0.9",
+		"lite-youtube-embed": "^0.3.3"
+	},
+	"devDependencies": {
+		"prettier": "^3.4.2"
+	},
+	"prettier": {
+		"printWidth": 64,
+		"tabWidth": 2,
+		"useTabs": true,
+		"semi": false,
+		"quoteProps": "consistent",
+		"trailingComma": "es5",
+		"bracketSpacing": false,
+		"bracketSameLine": false,
+		"arrowParens": "always",
+		"singleQuote": true
+	}
 }
