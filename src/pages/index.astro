@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const youtube_videos = await getCollection('youtube_videos');
 ---
 
 <Layout>
@@ -7,4 +10,21 @@ import Layout from '../layouts/Layout.astro';
 	<p>Until it's back online, many of the courses are now available as <a href="https://www.youtube.com/@chantastic/playlists">public playlists on Youtube</a>.</p>
 	<p>Thanks for suffering me.</p>
 	<p><a href="https://www.youtube.com/@chantastic">chan</a></p>
+
+	{youtube_videos.map(({data: {snippet: video, contentDetails}}) => {
+		return (
+			<div>
+				<h2>{video.title}</h2>
+				<p>{video.description}</p>
+				<iframe
+					width="560"
+					height="315"
+					src={`https://www.youtube.com/embed/${contentDetails.videoId}`}
+					title="YouTube video player"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen></iframe>
+			</div>
+		)
+	})}
 </Layout>
