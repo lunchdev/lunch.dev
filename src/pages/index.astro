@@ -8,32 +8,36 @@ const youtube_videos = await getCollection('youtube_videos');
 ---
 
 <Layout>
-	<p>I'm sorry. I fucked up and now the site is broken.</p>
-	<p>Until it's back online, many of the courses are now available as <a href="https://www.youtube.com/@chantastic/playlists">public playlists on Youtube</a>.</p>
-	<p>Thanks for suffering me.</p>
-	<p><a href="https://www.youtube.com/@chantastic">chan</a></p>
+	<title slot="title">lunch.dev | home</title>
 
-	{youtube_videos.map(({data: {snippet: video, contentDetails}}) => {
-		return (
-			<div>
-				<h2>{video.title}</h2>
-				<p>{video.description}</p>
-				<lite-youtube
-					videoid={contentDetails.videoId}
-				>
-					<a
-						href={`https://youtube.com/watch?v=${contentDetails.videoId}`}
-						class="lyt-playbtn"
-						title="Play Video"
+	<main>
+		<p>I'm sorry. I fucked up and now the site is broken.</p>
+		<p>Until it's back online, many of the courses are now available as <a href="https://www.youtube.com/@chantastic/playlists">public playlists on Youtube</a>.</p>
+		<p>Thanks for suffering me.</p>
+		<p><a href="https://www.youtube.com/@chantastic">chan</a></p>
+
+		{youtube_videos.map(({data: {snippet: video, contentDetails}}) => {
+			return (
+				<div>
+					<h2>{video.title}</h2>
+					<p>{video.description}</p>
+					<lite-youtube
+						videoid={contentDetails.videoId}
 					>
-						<span class="lyt-visually-hidden">
-							Play video: {video.title}
-						</span>
-					</a>
-				</lite-youtube>
-			</div>
-		)
-	})}
+						<a
+							href={`https://youtube.com/watch?v=${contentDetails.videoId}`}
+							class="lyt-playbtn"
+							title="Play Video"
+						>
+							<span class="lyt-visually-hidden">
+								Play video: {video.title}
+							</span>
+						</a>
+					</lite-youtube>
+				</div>
+			)
+		})}
+	</main>
 </Layout>
 
 <script src="lite-youtube-embed/src/lite-yt-embed.js"></script>
