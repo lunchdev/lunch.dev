@@ -1,10 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-import 'lite-youtube-embed/src/lite-yt-embed.css';
-
-const youtube_videos = await getCollection('youtube_videos');
 ---
 
 <Layout>
@@ -16,28 +11,6 @@ const youtube_videos = await getCollection('youtube_videos');
 		<p>Thanks for suffering me.</p>
 		<p><a href="https://www.youtube.com/@chantastic">chan</a></p>
 
-		{youtube_videos.map(({data: {snippet: video, contentDetails}}) => {
-			return (
-				<div>
-					<h2>{video.title}</h2>
-					<p>{video.description}</p>
-					<lite-youtube
-						videoid={contentDetails.videoId}
-					>
-						<a
-							href={`https://youtube.com/watch?v=${contentDetails.videoId}`}
-							class="lyt-playbtn"
-							title="Play Video"
-						>
-							<span class="lyt-visually-hidden">
-								Play video: {video.title}
-							</span>
-						</a>
-					</lite-youtube>
-				</div>
-			)
-		})}
+		<a href="/essential-react/16">Essential React, <span>v16</span></a>
 	</main>
 </Layout>
-
-<script src="lite-youtube-embed/src/lite-yt-embed.js"></script>

@@ -1,7 +1,7 @@
 import {YOUTUBE_API_KEY} from 'astro:env/server'
 import {defineCollection, z} from 'astro:content'
 
-const youtube_videos = defineCollection({
+const essential_react_16 = defineCollection({
 	loader: async () => {
 		const response = await fetch(
 			`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLnc_NxpmOxaM-yvNRB9MrZkLxF9GsB30C&key=${YOUTUBE_API_KEY}`
@@ -32,4 +32,4 @@ const youtube_videos = defineCollection({
 	}),
 })
 
-export const collections = {youtube_videos}
+export const collections = {essential_react_16}
