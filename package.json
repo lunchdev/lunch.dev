@@ -2,6 +2,9 @@
 	"name": "lunch-dev",
 	"type": "module",
 	"version": "0.0.1",
+	"imports": {
+		"#*": "./src/*"
+	},
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
