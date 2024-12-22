@@ -1,7 +1,6 @@
 ---
 import Layout from '#layouts/Layout.astro';
 import {getCollection} from "astro:content";
-import 'lite-youtube-embed/src/lite-yt-embed.css';
 
 const collection = await getCollection("essential_react_16");
 ---
@@ -21,5 +20,3 @@ const collection = await getCollection("essential_react_16");
 	</ol>
     </main>
 </Layout>
-
-<script src="lite-youtube-embed/src/lite-yt-embed.js"></script>

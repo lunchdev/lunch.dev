@@ -9,7 +9,11 @@ export async function getStaticPaths() {
 
 	return collection.map(({data: {order, snippet: {title, description}, contentDetails: {videoId}}}) => ({
 		params: {lesson: order},
-		props: {title, description, videoId},
+		props: {title, description, videoId, collection: collection.map(item => { return {
+			order: item.data.order,
+			title: item.data.snippet.title,
+			id: item.data.contentDetails.videoId
+		}})},
 	}));
 }
 
@@ -17,6 +21,11 @@ interface Props {
 	title: string;
 	description: string;
 	videoId: string;
+	collection: {
+		id: string,
+		order: string,
+		title: string
+	}[];
 }
 
 const props: Props = Astro.props;
@@ -37,6 +46,17 @@ const props: Props = Astro.props;
 			</span>
 		</a>
 	</lite-youtube>
+	<ol>
+			{props.collection.map(({order, title, id}) => {
+			return (
+				<li>
+					<a href={`/essential-react/16/${order}`}>
+					{id === props.videoId && "👉"}{title}
+					</a>
+				</li>
+			)
+		})}
+	</ol>
     </main>
 </Layout>
 
