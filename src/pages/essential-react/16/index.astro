@@ -9,10 +9,10 @@ const collection = await getCollection("essential_react_16");
 <Layout>
     <main>
 	<ol>
-		{collection.map(({data: {snippet: video, contentDetails}}) => {
+		{collection.map(({data: {order, snippet: video}}) => {
 			return (
 				<li>
-					<a href={`/essential-react/16/${String(video.position + 1).padStart(2, '0')}`}>
+					<a href={`/essential-react/16/${order}`}>
 						{video.title}
 					</a>
 				</li>

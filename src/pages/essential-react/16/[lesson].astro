@@ -7,8 +7,8 @@ import 'lite-youtube-embed/src/lite-yt-embed.css';
 export async function getStaticPaths() {
 	const collection = await getCollection("essential_react_16");
 
-	return collection.map(({data: {snippet: {title, description, position}, contentDetails: {videoId}}}) => ({
-		params: {lesson: String(position + 1).padStart(2, '0')},
+	return collection.map(({data: {order, snippet: {title, description}, contentDetails: {videoId}}}) => ({
+		params: {lesson: order},
 		props: {title, description, videoId},
 	}));
 }
