@@ -10,6 +10,12 @@ const essential_react_16 = defineCollection({
 		return data.items.map((item) => ({
 			...item,
 			order: String(item.snippet.position + 1).padStart(2, '0'),
+			snippet: {
+				...item.snippet,
+				title: item.snippet.title.split(
+					' | Essential React'
+				)[0],
+			},
 		}))
 	},
 	schema: z.object({
