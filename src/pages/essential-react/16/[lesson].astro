@@ -1,0 +1,43 @@
+---
+import Layout from '#layouts/Layout.astro';
+import {getCollection} from "astro:content";
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+
+
+export async function getStaticPaths() {
+	const collection = await getCollection("essential_react_16");
+
+	return collection.map(({data: {snippet: {title, description, position}, contentDetails: {videoId}}}) => ({
+		params: {lesson: String(position + 1).padStart(2, '0')},
+		props: {title, description, videoId},
+	}));
+}
+
+interface Props {
+	title: string;
+	description: string;
+	videoId: string;
+}
+
+const props: Props = Astro.props;
+---
+
+<Layout>
+    <main>
+	<h2>{props.title}</h2>
+	<p>{props.description}</p>
+	<lite-youtube videoid={props.videoId}>
+		<a
+			href={`https://youtube.com/watch?v=${props.videoId}`}
+			class="lyt-playbtn"
+			title="Play Video"
+		>
+			<span class="lyt-visually-hidden">
+				Play video: {props.title}
+			</span>
+		</a>
+	</lite-youtube>
+    </main>
+</Layout>
+
+<script src="lite-youtube-embed/src/lite-yt-embed.js"></script>
