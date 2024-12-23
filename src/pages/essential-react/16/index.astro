@@ -7,6 +7,10 @@ const collection = await getCollection("essential_react_16");
 
 <Layout>
     <main>
+	<h2>Essential React</h2>
+	<p>
+		Learn Essential React—the kind that makes you money. If you want to sound smart buzz-wordy at your next meet up, move along. This course is for doers. It moves fast from "Hello World" to advanced component composition, serving as a good overview of the best parts of React. Learn Essential React and start shipping code today!
+	</p>
 	<ol>
 		{collection.map(({data: {order, snippet: video}}) => {
 			return (
