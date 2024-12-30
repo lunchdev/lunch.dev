@@ -1,0 +1,28 @@
+---
+import Layout from '#layouts/Layout.astro';
+import {getCollection} from "astro:content";
+
+const collection = await getCollection("function_components_15");
+---
+
+<Layout>
+    <title slot="title">lunch.dev | function components</title>
+
+    <main>
+	<h2>Function Components</h2>
+	<p>
+        Function components are the simplest way to write components in React. They don't hold state, they don't fire lifecycle events; they simply take props and render a React Element. In this course you'll learn all about function components—writing them, composing them, using features like propTypes, context, and JSX spread attributes... all the things function component.
+	</p>
+	<ol>
+		{collection.map(({data: {order, snippet: video}}) => {
+			return (
+				<li>
+					<a href={`/function-components/15/${order}`}>
+						{video.title}
+					</a>
+				</li>
+			)
+		})}
+	</ol>
+    </main>
+</Layout>
