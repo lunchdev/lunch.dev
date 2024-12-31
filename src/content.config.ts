@@ -91,7 +91,9 @@ const style_components_15 = defineCollection({
 			order: String(item.snippet.position + 1).padStart(2, '0'),
 			snippet: {
 				...item.snippet,
-				title: item.snippet.title.split(' | Essential npm')[0],
+				title: item.snippet.title.split(
+					' | Style with Components'
+				)[0],
 			},
 		}))
 	},
@@ -110,7 +112,7 @@ const react_basics_12 = defineCollection({
 			order: String(item.snippet.position + 1).padStart(2, '0'),
 			snippet: {
 				...item.snippet,
-				title: item.snippet.title.split(' | Essential npm')[0],
+				title: item.snippet.title.split(' | React Basics')[0],
 			},
 		}))
 	},
