@@ -79,8 +79,28 @@ const essential_npm_6 = defineCollection({
 	schema: youtube_playlist_video_schema,
 })
 
+const style_components_15 = defineCollection({
+	loader: async () => {
+		const response = await fetch(
+			`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLnc_NxpmOxaP4YjooEcsKiBXp8EW1DnRZ&key=${YOUTUBE_API_KEY}`
+		)
+		const data = await response.json()
+
+		return data.items.map((item) => ({
+			...item,
+			order: String(item.snippet.position + 1).padStart(2, '0'),
+			snippet: {
+				...item.snippet,
+				title: item.snippet.title.split(' | Essential npm')[0],
+			},
+		}))
+	},
+	schema: youtube_playlist_video_schema,
+})
+
 export const collections = {
 	essential_react_16,
 	function_components_15,
 	essential_npm_6,
+	style_components_15,
 }

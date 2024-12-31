@@ -1,0 +1,64 @@
+---
+import Layout from '#layouts/Layout.astro';
+import {getCollection} from "astro:content";
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+
+
+export async function getStaticPaths() {
+	const collection = await getCollection("style_components_15");
+
+	return collection.map(({data: {order, snippet: {title, description}, contentDetails: {videoId}}}) => ({
+		params: {lesson: order},
+		props: {title, description, videoId, collection: collection.map(item => { return {
+			order: item.data.order,
+			title: item.data.snippet.title,
+			id: item.data.contentDetails.videoId
+		}})},
+	}));
+}
+
+interface Props {
+	title: string;
+	description: string;
+	videoId: string;
+	collection: {
+		id: string,
+		order: string,
+		title: string
+	}[];
+}
+
+const props: Props = Astro.props;
+---
+
+<Layout>
+    <main>
+	<h2>{props.title}</h2>
+	<p>{props.description}</p>
+	<lite-youtube videoid={props.videoId}>
+		<a
+			href={`https://youtube.com/watch?v=${props.videoId}`}
+			class="lyt-playbtn"
+			title="Play Video"
+		>
+			<span class="lyt-visually-hidden">
+				Play video: {props.title}
+			</span>
+		</a>
+	</lite-youtube>
+	<ol>
+		{props.collection.map(({order, title, id}) => {
+			return (
+				<li>
+					<a href={`/style-components/15/${order}`}>
+					{id === props.videoId && "👉"}{title}
+					</a>
+				</li>
+			)
+		})}
+	</ol>
+    </main>
+</Layout>
+
+<script src="lite-youtube-embed/src/lite-yt-embed.js"></script>
+
