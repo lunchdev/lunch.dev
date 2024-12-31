@@ -1,0 +1,24 @@
+---
+import Layout from '#layouts/Layout.astro';
+import {getCollection} from "astro:content";
+
+const collection = await getCollection("essential_npm_6");
+---
+
+<Layout>
+    <main>
+	<h2>Essential npm</h2>
+	<p>Are you an NPM button masher? Do lack confidence when adding, updating, are removing dependencies? Are you worried you might change a dependency only to break your site? Essential NPM is for you. In it are the secrets of the NPM command line utility for application developers. In a few short lessons you'll gain total confidence in managing your dependencies with NPM</p>
+	<ol>
+		{collection.map(({data: {order, snippet: video}}) => {
+			return (
+				<li>
+					<a href={`/essential-npm/6/${order}`}>
+						{video.title}
+					</a>
+				</li>
+			)
+		})}
+	</ol>
+    </main>
+</Layout>
