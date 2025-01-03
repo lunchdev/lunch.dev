@@ -12,8 +12,10 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@astrojs/tailwind": "^5.1.4",
 		"astro": "^5.0.9",
-		"lite-youtube-embed": "^0.3.3"
+		"lite-youtube-embed": "^0.3.3",
+		"tailwindcss": "^3.4.17"
 	},
 	"devDependencies": {
 		"prettier": "^3.4.2"
