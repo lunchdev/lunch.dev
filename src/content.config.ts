@@ -1,5 +1,6 @@
 import {YOUTUBE_API_KEY} from 'astro:env/server'
 import {defineCollection, z} from 'astro:content'
+import {glob} from 'astro/loaders'
 
 const youtube_playlist_video_schema = z.object({
 	id: z.string(),
@@ -138,6 +139,13 @@ const react_context_16_3 = defineCollection({
 	schema: youtube_playlist_video_schema,
 })
 
+const guides = defineCollection({
+	loader: glob({pattern: '**/*.md', base: './guides'}),
+	schema: z.object({
+		title: z.string(),
+	}),
+})
+
 export const collections = {
 	essential_react_16,
 	function_components_15,
@@ -145,4 +153,5 @@ export const collections = {
 	style_components_15,
 	react_basics_12,
 	react_context_16_3,
+	guides,
 }

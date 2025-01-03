@@ -1,0 +1,59 @@
+---
+import Layout from '#layouts/Layout.astro';
+import {getCollection, CollectionEntry, getEntry, render} from "astro:content";
+
+
+export async function getStaticPaths() {
+	const collection = await getCollection('guides');
+	return collection.map((lesson) => ({
+		params: {lesson_id: lesson.id},
+		props: {
+			lesson,
+			collection,
+		},
+	}));
+}
+
+interface Props {
+	lesson: { title: string };
+	collection: {
+		title: string
+	}[];
+}
+
+const props: Props = Astro.props;
+
+const entry = await getEntry(props.lesson); // supports two overloads. one with 'collection' and 'id' as strings. second with them as object propreties, allowing to pass an entire entry
+const { Content } = await render(entry);
+---
+
+<Layout>
+	<title slot="title">{props.lesson.data.title} | New Mac | lunch.dev</title>
+	<main>
+		<h1>{props.lesson.data.title}</h1>
+		<Content />
+	</main>
+	<ol>
+		{props.collection.filter(lesson => {
+			if (props.lesson.id === lesson.id) {
+				return true;
+			}
+
+			if (lesson.id.includes(props.lesson.id.match(/(.+)\/.+$/)?.[1])) {
+				return true;
+			}
+
+			return props.lesson.id.includes(lesson.id.match(/(.+)\/.+$/)?.[1])
+		  }
+		).map((lesson) => {
+			return (
+				<li>
+					<a href={`/${lesson.id}`}>
+					{lesson.id === props.lesson.id && "👉"}{lesson.data.title}
+					</a>
+				</li>
+			)
+		})}
+	</ol>
+</Layout>
+
