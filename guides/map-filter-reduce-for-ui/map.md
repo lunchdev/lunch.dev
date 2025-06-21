@@ -3,7 +3,6 @@ title: Transform arrays elements with .map()
 ---
 
 `.map` is an array method.
-So it's called on arrays.
 
 But it can't be called alone.
 It requires a fuction.
